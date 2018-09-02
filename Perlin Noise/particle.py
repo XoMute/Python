@@ -4,9 +4,9 @@ from main import *
 class Particle:
 
 	def __init__(self):
-		self.pos = pygame.math.Vector2(randint(0, screen_width), randint(0, screen_height))
-		self.vel = pygame.math.Vector2(uniform(-0.5, 0.5), uniform(-0.5, 0.5))
-		self.acc = pygame.math.Vector2(0, 0)
+		self.pos = pygame.math.Vector2(randint(1, screen_width), randint(1, screen_height - 1))
+		self.vel = pygame.math.Vector2(0)
+		self.acc = pygame.math.Vector2(0)
 
 	def update(self):
 		self.vel += self.acc
@@ -32,8 +32,11 @@ class Particle:
 			self.pos.y = screen_height
 
 	def follow(self, vectors):
-		x = int(self.pos.x / scl)
-		y = int(self.pos.y / scl)
+		x = floor(self.pos.x / scl)
+		y = floor(self.pos.y / scl)
+		print("Corrected x = ", x, "Corrected y = ", y)
+		print("x =", self.pos.x, "y = ", self.pos.y)
 		index = x + y * cols
+		print(cols, index)
 		force = vectors[index]
 		self.applyForce(force)

@@ -36,8 +36,8 @@ def polarToDecart(len, start, angle):
 	return [int(eX), int(eY)]
 
 scl = 10
-cols = int(screen_width / scl)
-rows = int(screen_height / scl)
+cols = floor(screen_width / scl)
+rows = floor(screen_height / scl)
 
 def main():
 
@@ -99,11 +99,10 @@ def main():
 				#angle = map(pnoise3(xoff, yoff, zoff), -1, 1, 0, pi* 2) #* pi * 2
 				angle = pnoise3(xoff, yoff, zoff) * pi * 2
 				end = polarToDecart(scl, start, angle)
-				print("angle =", degrees(angle))
+				#print("angle =", degrees(angle))
 
-				
-				flowfield[index].rotate(degrees(angle))
-				print(flowfield[index])
+				flowfield[index].from_polar((1, degrees(angle)))#made it to apply forces 
+				#												dependent on direction of the closest vector
 				pygame.draw.line(alphaSurf, (0, 0, 0, 50), start, end)
 				xoff += inc
 
@@ -114,6 +113,7 @@ def main():
 		screen.blit(alphaSurf, (0, 0))
 
 		for particle in particles:
+			particle.follow(flowfield)
 			particle.update()
 			particle.show(screen)
 
