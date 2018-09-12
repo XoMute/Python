@@ -49,8 +49,8 @@ def hashHSV():
 def main():
 
 	pygame.init()
-	logo = pygame.image.load("../Images/icon.png")
-	pygame.display.set_icon(logo)
+	#logo = pygame.image.load("../Images/icon.png")
+	#pygame.display.set_icon(logo)
 	pygame.display.set_caption("Sample Text")
 
 	screen = pygame.display.set_mode((screen_width, screen_height))
